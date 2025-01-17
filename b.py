@@ -47,7 +47,7 @@ cur_path = os.getcwd()
 
 # Recuperación de las imágenes y sus etiquetas
 for i in range(classes): 
-    path = os.path.join(r'C:\Users\Javi\Downloads\archive3', 'Train', str(i))
+    path = os.path.join(r'inserte la ruta del dataset', 'Train', str(i))
     images = os.listdir(path)
 
     for a in images:
@@ -124,7 +124,7 @@ x = Dense(256, activation='relu')(x)
 x = Dropout(0.4)(x)
 x = Dense(128, activation='relu')(x)
 x = Dropout(0.3)(x)
-predictions = Dense(classes, activation='softmax')(x)  # Ajustar para 5 clases
+predictions = Dense(classes, activation='softmax')(x)  
 
 # Crear el modelo
 model = Model(inputs=base_model.input, outputs=predictions)
@@ -179,13 +179,13 @@ K.clear_session()
 gc.collect()
 
 # Cargar datos de prueba desde un archivo .csv
-test_df = pd.read_csv(r'C:\Users\Javi\Downloads\archive3\Test.csv')
+test_df = pd.read_csv(r'inserte la ruta del csv test')
 labels_test = test_df["ClassId"].values
 imgs = test_df["Path"].values
 
 test_data = []
 for img in imgs:
-    image = Image.open(os.path.join(r'C:\Users\Javi\Downloads\archive3', img))
+    image = Image.open(os.path.join(r'inserte la ruta de la carpeta test', img))
     image = image.resize((image_size, image_size))
     image = np.array(image)
     image = preprocess_input(image)
