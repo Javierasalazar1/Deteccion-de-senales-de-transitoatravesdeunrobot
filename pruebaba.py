@@ -5,7 +5,7 @@ import time
 from flask import Flask, Response
 from threading import Thread
 from picamera2 import Picamera2
-from picarx import Picarx  # Importar librerÃ­a de control del robot
+from picarx import Picarx  # Importar libreria de control del robot
 
 # Configuraciones del modelo
 TFLITE_MODEL_PATH = '/home/py3/Desktop/TESIS/modelo.tflite'
@@ -27,7 +27,7 @@ class TrafficSignDetector:
         self.input_details = self.interpreter.get_input_details()
         self.output_details = self.interpreter.get_output_details()
         
-        # Inicializar cÃ¡mara
+        # Inicializar camara
         self.picam2 = Picamera2()
         config = self.picam2.create_still_configuration()
         self.picam2.configure(config)
@@ -63,14 +63,14 @@ class TrafficSignDetector:
         return input_data
 
     def detect_sign(self):
-        """Detecta seÃ±ales de trÃ¡fico continuamente"""
+        """Detecta señales de trafico continuamente"""
         global frame_to_stream
 
         while self.running:
             # Capturar frame
             frame = self.picam2.capture_array()
             
-            # Reducir resoluciÃ³n del frame para transmision
+            # Reducir resolucion del frame para transmision
             frame = cv2.resize(frame, (800, 600))  
            
             # Convertir de RGB a BGR para OpenCV
@@ -162,13 +162,13 @@ class TrafficSignDetector:
             self.px.forward(50)  # Velocidad del motor: 50
             print("Clase detectada: Avanzar")
         elif current_sign == '2':  # Clase 2: Izquierda
-            self.px.set_dir_servo_angle(30)  # Corrige el angulo para girar a la izquierda
+            self.px.set_dir_servo_angle(30) 
             self.px.forward(50)
             time.sleep(1.3)  # Giro de 1 segundo
             self.px.set_dir_servo_angle(0)  # Endereza las ruedas
             print("Clase detectada: Girar a la izquierda")
         elif current_sign == '3':  # Clase 3: Derecha
-            self.px.set_dir_servo_angle(-30)  # Corrige el angulo para girar a la derecha
+            self.px.set_dir_servo_angle(-30)  
             self.px.forward(50)
             time.sleep(1.3)  # Giro de 1 segundo
             self.px.set_dir_servo_angle(0)  # Endereza las ruedas
@@ -214,7 +214,7 @@ def main():
         # Iniciar deteccion
         detector.start_detection()
         
-        # Iniciar Flask en un hilo
+        # Iniciar Flask 
         flask_thread = Thread(target=lambda: app.run(host='0.0.0.0', port=9000, debug=False, use_reloader=False))
         flask_thread.start()
         
