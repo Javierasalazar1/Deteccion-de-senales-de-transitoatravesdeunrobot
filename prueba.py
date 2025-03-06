@@ -7,7 +7,7 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 # Cargar el modelo entrenado
 model = tf.keras.models.load_model('Clasificacion_Trafic5_mejorado_con_null.h5')
 
-# Diccionario para mapear las clases a nombres (ajusta según tus clases)
+# Diccionario para mapear las clases a nombres 
 class_labels = {
     0: 'Clase 0',
     1: 'Clase 1',
